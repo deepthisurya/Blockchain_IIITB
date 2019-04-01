@@ -1,0 +1,20 @@
+package com.company;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.File;
+
+public class meanOfNumbers {
+    public static void main(String[] args)throws FileNotFoundException{
+        int number=0,count=0,sum=0;
+        String path = "C:\\Users\\Deepthi.LAPTOP-VABF7IMA\\Documents\\Blockchain\\Exercise\\numbers.txt";
+        File fp = new File(path);
+        Scanner sc = new Scanner(fp);
+        while(sc.hasNext()){
+            number = sc.nextInt();
+            sum = sum +number;
+            ++count;
+        }
+        int mean = sum/count;
+        System.out.print(mean);
+    }
+}

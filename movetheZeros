@@ -1,0 +1,35 @@
+package com.company;
+import java.util.*;
+
+import java.util.*;
+
+public class movetheZeros {
+    public static void main(String args[]) {
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++)
+            arr[i] = s.nextInt();
+        moveZerosToEnd(arr);
+        for (int i = 0; i < arr.length; i++)
+            System.out.print(arr[i] + " ");
+    }
+
+    // Method to find move all zeros to the end of the array
+    static void moveZerosToEnd(int[] arr) {
+        // Write your code here
+        int leftIndex =0 , rightIndex = arr.length-1,temp;
+        for(int i=0;i<=rightIndex;i++){
+             if(arr[i]==0){
+                 leftIndex=i;
+                 temp=arr[i];
+                 while (leftIndex<rightIndex){
+                     arr[leftIndex]=arr[++leftIndex];
+                 }
+                 arr[rightIndex]=temp;
+                 rightIndex--;
+             }
+        }
+    }
+
+}

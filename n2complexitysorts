@@ -1,0 +1,80 @@
+
+/*
+The below are all in-place algorithm to sort the array in the ascending order only
+*/
+
+public class n2complexitysorts{
+    /*we are hard coding the elements of the array for ease of testing*/
+    //since these two variables are required in almost all the methods , we are declaring as static and as private since we need their access limited to this class only
+    private static int[] arr = {20,18,7,4,5,3,10,11,15};
+    private static int arr_size = arr.length;
+        //Driver function below
+    public static void main(String[] args){
+
+        printDetails(arr);
+        // all the below sorts are performed in ascending order
+        //bubble_sort(arr);
+        //selection_sort(arr);
+        insertion_sort(arr);
+        printDetails(arr);
+    }
+// This method performs selection sort on the array
+public static void selection_sort(int[] arr){
+        int swap=0,comparision=0;
+        for(int i=0;i<arr_size;i++){ // outer loop to traverse through the array
+            int min = i ;// lets take the first index in the array as min
+           for(int j=i+1;j<arr_size;j++){ // now this first element is compared to its next element in the inner loop
+               comparision++; // each element is compared with next element in n-1 times in each iteration;
+               if(arr[j] < arr[min]){
+                   min = j; // when a smaller number is found in the array capture the index
+                   // we have to catch the position at which the min is identified and perform swap after all the comparision are completed
+               }
+           }
+            //swap should occur when min value changes , otherwise no swap
+            int temp = arr[i];
+            arr[i] = arr[min]; // we have captured the position at which min value changed and performed swap at that with the initial min
+            arr[min]=temp;
+            swap++;
+        }
+    System.out.println("\nNo of comparision : "+comparision+"\nNo of swaps : "+swap+"\n");
+}
+// This method performs insertion sort on the given array
+    public static void insertion_sort(int[] arr){
+        int comparision=0,swap=0;
+        for(int i=1;i<arr_size;i++){
+            int j=i;
+            while(j>0 && arr[j-1]>arr[j]){
+                comparision++;
+                int temp = arr[j];
+                arr[j] = arr[j-1];
+                arr[j-1] = temp;
+                j--;
+            }
+        }
+        System.out.println("\nNo of comparision : "+comparision+"\nNo of swaps : "+swap+"\n");
+    }
+//    This method performs bubble sort on the given array
+    public static void bubble_sort(int[] arr){
+        int comparisons = 0 , swap =0;
+        for(int i=0;i< arr_size;i++ ){
+            for (int j=1;j< arr_size-i;j++){ // here we are having another loop to perform comparisons
+                // in each traversal one element is sorted to the position from last
+                comparisons++; // in each traversal the element is compared to its previous element arr_size-1 times
+                if(arr[j-1] > arr[j]){ // if the numbers are not in required order , we will swap here.
+                    int temp = arr[j]; // we are sorting in ascending order so we will swap here
+                    arr[j] = arr[j-1];
+                    arr[j-1] = temp;
+                    swap++; // for worst case comparision's  = swap otherwise swap < comparision
+                }
+            }
+        }
+        System.out.println("\nNo of comparision : "+comparisons+"\nNo of swaps : "+swap+"\n");
+    }
+    /*This method prints the details int he array*/
+    public static void printDetails(int[] arr){
+        for(int i=0;i< arr_size;i++){
+            System.out.print(arr[i]+" ");
+        }
+        System.out.println();
+    }
+}

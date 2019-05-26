@@ -1,0 +1,54 @@
+package com.company;
+import java.rmi.StubNotFoundException;
+import java.util.Scanner;
+import java.lang.ArrayIndexOutOfBoundsException;
+/*
+1.The array is sorted is an ascending order
+2.The array holds distinct integers (i.e. there are no repeating numbers)
+3.The array is 1-indexed, i.e. the first element is stored in A[1] (not A[0])
+4.However the length of the array, N, is unknown
+(i.e. you don’t know how long the array is and arrayName.length is not available to you).
+In short, you can not use the length of the array to apply binary search
+*/
+
+public class binarySearchRecursive {
+    //Driver function for the problem
+    public static void main(String[] args) throws ArrayIndexOutOfBoundsException {
+        Scanner sc = new Scanner(System.in);
+        int size = sc.nextInt(); //first input will be the size of the array
+        int[] StudentID = new int[size + 1];
+        int M = sc.nextInt(); // Second input will be the key you are looking to search
+        for (int i = 1; i <= size; i++) {
+            StudentID[i] = sc.nextInt(); // elements of the array
+        }
+        try {
+            int position = binary_search(StudentID,M,1,size);
+            System.out.println(position);
+            //findEnd(StudentID, M,1); // Sending the key to be searched
+        } catch (Exception e) {
+            System.out.println("Not Found");
+        }
+    }
+    public static void findEnd(int[] arr, int key, int start){
+        //keep checking for upper limit until it throws an exception
+    }
+
+    // Performing Binary Search of the complexity logn on the array
+    public static int binary_search(int[] StudentID, int key, int start, int end) {
+
+       if(start > end) {
+           return -1;
+       }
+       int mid = start + (end-start)/2;
+       if(StudentID[mid]==key){
+           return mid;
+       }else if(key < StudentID[mid]){
+           return binary_search(StudentID, key, start,mid-1);
+       }else if(key > StudentID[mid]){
+           return binary_search(StudentID,key, mid+1, end);
+       }
+       return -1;
+    }
+}
+
+

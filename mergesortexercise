@@ -1,0 +1,74 @@
+package com.company;
+import java.util.Scanner;
+/*
+Merge Sort
+Description
+Write a function that merges two sorted arrays in descending order, where the number of the elements is between 1 and 100,000 (0 < array size <= 100000). 
+
+This code will take the following inputs in the sequence mentioned here:
+The size of the first sorted array.
+The size of the second sorted array.
+Elements of the first sorted array.
+Elements of the second sorted array.
+
+Sample Input:
+3 
+4 
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+**/
+class mergesortexercise {
+
+    public static void main(String ss[]) {
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray1 = scanner.nextInt();
+        int sizeArray2 = scanner.nextInt();
+        int sortedArray1[] = getArrayInput(sizeArray1, scanner);
+        int sortedArray2[] = getArrayInput(sizeArray2, scanner);
+
+        int descendingMerge[]=mergeBothInDescendingOrder(sortedArray1, sortedArray2);
+
+        //Write your code here
+        for(Integer l : descendingMerge){
+            System.out.print(l+" ");
+        }
+
+
+    }
+    public static int[] getArrayInput(int size, Scanner sc){
+        int[] arr= new int[size];
+        for(int i=0;i<size;i++){
+            arr[i] = sc.nextInt();
+        }
+        return arr;
+    }
+    public static int[] mergeBothInDescendingOrder(int[] arr1, int[] arr2){
+        int[] tempA = new int[arr1.length+arr2.length];
+        int lp1 = 0, lp2 =0;
+        int rp1 = arr1.length-1,rp2 = arr2.length-1;
+        int tindex=0;
+        while(rp1 >= lp1 && rp2 >= lp1){ // both arrays have some elements
+            if(arr1[rp1] >= arr2[rp2]){
+                tempA[tindex] = arr1[rp1];
+                rp1--;
+            }else {
+                tempA[tindex] = arr2[rp2];
+                rp2--;
+            }
+            tindex++;
+        }
+        while(rp1 >= lp1){
+            tempA[tindex++] = arr1[rp1--]; // adding remaining elments in arr1 into temp array
+        }
+        while(rp2 >= lp2){
+            tempA[tindex++] = arr2[rp2--]; // adding remaining elments in arr1 into temp array
+        }
+     return tempA;
+    }
+
+}

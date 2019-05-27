@@ -1,0 +1,50 @@
+package com.company;
+//@param arr is the arr on which quick sort is performed
+//Hard coding the array details
+public class QuickSortonArray {
+    public static void main(String[] args){
+        int[] Number_list = {7,2,1,6,5,3,8,4};
+        int end = Number_list.length-1;
+        printDetails(Number_list); // helper function to print the array details
+        quick_sort(Number_list,0,end);
+        printDetails(Number_list); // helper function to print the array details
+    }
+
+    public static void printDetails(int[] Number_list){
+        for(Integer ar : Number_list){
+            System.out.print(ar+" ");
+        }
+        System.out.println();
+    }
+    public static void quick_sort(int[] arr,int start, int end){
+        if(start < end) {
+            int p = parition(arr, start, end);
+
+            quick_sort(arr, start, p - 1);
+            quick_sort(arr, p + 1, end);
+        }
+    }
+    //@param start is the pointer to the starting position
+    //@param pivot is the last element in the array which is taken as the pivot element
+    //@pointer is the pointer to the first element
+    //@param is the pointer to the last element is the array
+    public static int parition(int[] Number_List, int start, int end){
+        int pivot= Number_List[end];
+        int pointer= start;
+        for(int i=start;i< end;i++){
+            if(Number_List[i] <= pivot){
+                //All the numbers smaller than pivot are swapped to the left position
+                int temp = Number_List[i];
+                Number_List[i]=Number_List[pointer];
+                Number_List[pointer] = temp;
+                pointer++;
+            }
+        }
+        // pointer comes to the position where all the lesser numbers are on the left side
+        //At this stage the pivot reaches its right position in the array :: its sorted
+        int temp = Number_List[end];
+        Number_List[end] = Number_List[pointer];
+        Number_List[pointer] = temp;
+        return pointer;
+    }
+}

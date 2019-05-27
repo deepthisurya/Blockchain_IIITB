@@ -1,0 +1,70 @@
+package com.company;
+
+//@param arr is the arr on which quick sort is performed
+//Hard coding the array details
+public class mergeSort {
+    public static void main(String[] args) {
+        int[] Number_list = {7, 2, 1, 6, 5, 3, 8, 4};
+        printDetails(Number_list); // helper function to print the array details
+        merge_sort(Number_list);
+        printDetails(Number_list); // helper function to print the array details
+    }
+
+    public static void printDetails(int[] Number_list) {
+        for (Integer ar : Number_list) {
+            System.out.print(ar + " ");
+        }
+        System.out.println();
+    }
+
+    public static void merge_sort(int[] arr) { // helper function
+        merge_sort(arr, new int[arr.length],0, arr.length -1);
+    }
+
+    public static void merge_sort(int[] arr,int[] temp, int leftStart, int rightEnd) {
+        if (leftStart >= rightEnd) {
+            return;
+        }
+        int middle = leftStart + (rightEnd - leftStart)/ 2;
+        merge_sort(arr,temp, leftStart, middle);
+        merge_sort(arr,temp, middle+1, rightEnd);
+
+        mergeHalves(arr,temp, leftStart, rightEnd);
+    }
+
+    //@param start is the pointer to the starting position
+    //@param pivot is the last element in the array which is taken as the pivot element
+    //@pointer is the pointer to the first element
+    //@param is the pointer to the last element is the array
+    public static void mergeHalves(int[] arr, int[] temp, int leftstart, int rightEnd) {
+        int leftEnd = (leftstart+rightEnd)/2;
+        int rightStart = leftEnd+1;
+        int size = rightEnd-leftstart+1; // find out why
+
+        int lp = leftstart;
+        int rp = rightStart;
+        int tempindex = leftstart;
+
+        //when both arrays have same number of elements
+        while(lp <= leftEnd && rp <= rightEnd){
+            if(arr[lp] <= arr[rp]){
+                temp[tempindex] = arr[lp];
+                lp++;
+            }else {
+                temp[tempindex] = arr[rp];
+                rp++;
+            }
+            tempindex++;
+        }
+        //when right array goes empty fill all the remaining elements into the temp array ,
+        // since they are already sorted
+        while(lp <= leftEnd){
+            temp[tempindex++] = arr[lp++];
+        }
+        while(rp <= rightEnd){
+            temp[tempindex++] = arr[rp++];
+        }
+        // now copy all the temp elments back to array
+        System.arraycopy(temp,leftstart,arr,leftstart,size);
+    }
+}

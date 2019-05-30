@@ -1,0 +1,38 @@
+package com.company;
+
+import java.util.Scanner;
+
+/* @param arr the array in which the element needs to be searched
+@param key is the element that needs to be searched
+@size size of the array
+Linear search is implemented using recursion
+*/
+public class linerSearchWithRecursion {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int size = sc.nextInt(); // Size of the array
+        int[] arr = new int[size];
+        for (int i = 0; i < size; i++) {
+            arr[i] = sc.nextInt();  // Catch the elements of the array
+        }
+        int key = sc.nextInt();  // The element that needs to be found
+        linearSearch(arr, key, 0);
+    }
+
+    public static void linearSearch(int[] arr, int key, int i) {
+        // the array is zero based here -1 is a number outside of array
+        int p = 0;
+        if(i==arr.length){
+            System.out.println("Not Found");
+            return;
+        }else{
+            if(arr[i]==key){
+                p = i;
+            }else
+                linearSearch(arr,key,i+1);
+        }
+        if(p!=0) {
+            System.out.println("Found at : " + p);
+        }
+    }
+}

@@ -1,0 +1,48 @@
+class coinProblem {
+    public static void main(String[] args) {
+        int[] dj = {1, 7, 10};
+        int n = 14;
+        prepMatrix(n, dj);
+    }
+
+    //@param d is the denomination of the coins used.
+    public static void prepMatrix(int amount, int[] d) {
+        int[][] v = new int[amount + 1][d.length + 1];
+
+        // if the amount=0 we dont pay for anything
+        for (int j = 0; j <= d.length; j++) {
+            v[0][j] = 0;
+        }
+        // if the denomination  d=1  the number of coins used is the amount itself
+        for (int i = 0; i <= amount; i++) {
+            v[i][0] = i;
+        }
+        // Filling rest of the matrix
+        for (int j = 1; j <= d.length; j++) {
+            for (int i = 1; i <= amount; i++) {
+                if (d[j - 1] <= i && v[i][j - 1] > 1 + v[i - d[j-1]][j]) {
+                    v[i][j] = 1 + v[i - d[j-1]][j];
+                } else {
+                    v[i][j] = v[i][j - 1];
+                }
+            }
+        }
+        System.out.println("Min number of coins used :" + v[amount][d.length]); // v[n][k]
+
+        //printing the logic for knowing which coin is picked
+        int i = amount;
+        int j = d.length;
+        while (i > 0 && j >0){
+            if(v[i][j] == v[i][j-1]){
+                j--;
+            }else {
+                System.out.println("picked coin : "+d[j-1]);
+                i=i-d[j-1];
+            }
+        }
+        while(i>0){
+            System.out.println("picked coin : "+d[0]);
+            i--;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+package com.company;
+
+import java.util.Scanner;
+
+class Source {
+   public static void main(String[] args){
+       Scanner sc = new Scanner(System.in);
+       int n = sc.nextInt();
+       //System.out.println(fibrecursionSeries(n));
+       System.out.println(fibDynamic(n));
+   }
+   public static int fibDynamic(int n){
+       int[] arr = new int[n+2];
+       arr[0] = 0;
+       arr[1] = 1;
+       if(n>=2){
+           arr[n] = fibDynamic(n-1) + fibDynamic(n-2);
+
+       }
+       return arr[n];
+   }
+   public static int fibrecursionSeries(int n) {
+    if(n==0){
+        return 0;
+    }else if(n==1){
+        return 1;
+    }else
+         return (fibrecursionSeries(n-1)+ fibrecursionSeries(n-2));
+   }
+}

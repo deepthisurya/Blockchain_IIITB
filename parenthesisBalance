@@ -1,0 +1,46 @@
+package com.company;
+
+import java.util.*;
+import java.util.EmptyStackException;
+import java.lang.String;
+
+public class Source {
+    public static boolean match(String parens) {
+        //write your code here
+        int count1 = 0, count2 = 0;
+        char[] ch = parens.toCharArray();
+        try {
+            for (char c : ch) {
+                switch (c) {
+                    case '(':
+                        count1++;
+                        break;
+                    case ')':
+                        count1--;
+                        break;
+                    case '{':
+                        count2++;
+                        break;
+                    case '}':
+                        count2--;
+                        break;
+                    default:
+                        throw new Exception("Invalid Character!");
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        if (count1 == 0 && count2 == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.println(match(in.nextLine()));
+        in.close();
+    }
+}

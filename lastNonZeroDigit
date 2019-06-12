@@ -1,0 +1,33 @@
+package com.company;
+import java.io.OutputStream;
+import java.util.*;
+
+class Source {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n =  sc.nextInt();
+        long factN = fact(n);
+        System.out.println(factN);
+        lastNonZeroDigit(factN);
+    }
+    public static void lastNonZeroDigit(long n){
+        while(n>0){
+            if(n%10!=0){
+                System.out.println(n%10);
+                break;
+            }
+            n=n/10;
+        }
+    }
+    public static long fact(int n){
+        long[] arr = new long[n+1]; // This array stores all the values of the number factorials
+        arr[0] = 1;
+        for(int i=1;i<=n;i++){
+            arr[i] = i*arr[i-1];
+        }
+        /*for(long k : arr){ // prints all th array numbers each holder the index factorial value
+            System.out.println(k);
+        }*/
+        return arr[n];
+    }
+}

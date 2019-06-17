@@ -1,0 +1,41 @@
+package com.company;
+
+import java.util.*;
+
+class Source {
+
+
+    public static boolean checkBalanced(String inputString){
+        Stack < Integer > inputStack = new Stack < Integer > ();
+        Stack<Character> newStack=new Stack<>();
+        for(int i=0;i<inputString.length();i++) {
+            if (inputString.charAt(i) == '(') {
+                newStack.push(inputString.charAt(i));
+            }
+            if (inputString.charAt(i) == ')') {
+                if (newStack.isEmpty()) {
+                    return false;
+                } else {
+                    newStack.pop();
+                }
+            }
+        }
+        if(newStack.isEmpty())
+            return true;
+        else
+            return false;
+    }
+
+    public static void main(String[] args) {
+        Source obj = new Source();
+        Scanner in = new Scanner(System.in);
+        String inputString = in.nextLine();
+        try {
+            boolean status = obj.checkBalanced(inputString);
+            System.out.println(status);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+}
+

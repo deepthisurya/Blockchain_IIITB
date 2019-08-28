@@ -1,0 +1,43 @@
+import java.util.*;
+
+public class Source {
+    public static void main(String args[]) {
+        Stack<Integer> stack = new Stack<>();
+        Stack<Integer> sortedStack = new Stack<Integer>();
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        while (n-- > 0)
+            stack.push(s.nextInt());
+        System.out.println(stack);
+        sort(stack, sortedStack);
+        System.out.println(sortedStack);
+    }
+
+    // Method to sort the elements of the stack in ascending order
+    public static Stack<Integer> sort(Stack<Integer> stack, Stack<Integer> sortedStack) {
+        Stack<Integer> temp = findMin(stack);
+        if (temp==null) {
+            return sortedStack;
+        }
+        sortedStack.push(temp.pop());
+        sort(temp, sortedStack);
+
+        return sortedStack;
+    }
+
+    public static Stack<Integer> findMin(Stack<Integer> stack) {
+        if(stack.isEmpty())return null;
+        Stack<Integer> tempStack = new Stack<Integer>();
+        int min = stack.pop();
+        while (!stack.isEmpty()) {
+            if (min > stack.peek()) {
+                int temp = min;
+                min = stack.pop();
+                stack.push(temp);
+            }
+            tempStack.push(stack.pop());
+        }
+        tempStack.push(min);
+        return tempStack;
+    }
+}
